@@ -1,6 +1,12 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI() # Creates your main Application Object; Everything gets attached to this Functions 
+
+class Task(BaseModel):
+    title: str
+    done: bool = True
+
 
 tasks = [] # acting as an normal python list for our database for now
 
@@ -17,6 +23,13 @@ def get_tasks():
 def create_task(task:dict):
     tasks.append(task)
     return { "message": "Task Added" , "tasks": task}
+
+@app.get("/tasks/{task_id}")
+def get_task(task_id: int):
+    if task_id < len(tasks):
+        return tasks[task_id]
+    return {"Error ": "task not found"}
+
 
 
 
