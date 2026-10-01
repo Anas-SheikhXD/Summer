@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1> My Tasks</h1>
+
+    <!-- Button that will trigger the API call -->
+     <button onclick="loadTasks()"> Load Tasks  </button>
+
+     <br><br>
+<input type="text" id="task-input" placeholder="Enter task title" />
+<button onclick="createTask()">Add Task</button>
+     
+     <!-- Empty div — JavaScript will put the tasks here -->
+      <div id="task-list">  </div>
+
+     <script>
+    function loadTasks() {
+        fetch("http://127.0.0.1:8000/tasks")
+            .then(response => response.json())
+            .then(data => {
+                // grab the empty div from the HTML
+                const taskList = document.getElementById("task-list")
+
+                // clear it first (in case we click the button multiple times)
+                taskList.innerHTML = ""
+
+                // loop through each task and add it to the page
+                data.forEach(task => {
+                    const item = document.createElement("p")
+                    item.textContent = task.title + " — done: " + task.done
+                    taskList.appendChild(item)
+                })
+            })
+    }
+    
+    function createTask() {
+    const title = document.getElementById("task-input").value
+
+    fetch("http://127.0.0.1:8000/tasks", {
+        method: "POST",                         // this time it's a POST request
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: title, done: false })  // send task as JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)       // confirm the API responded
+        loadTasks()             // reload the task list automatically
+    })
+}
+
+</script>
+
+
+</body>
+</html>

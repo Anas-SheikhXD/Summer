@@ -1,56 +1,50 @@
-# # key   >   value 
+# key   >   value 
 
-# student = {
-#     "name " : "Anas",
-#     "City" : "Multan",
-#     "Semester" : "2nd"
-# }
-
-# print(student["Semester"])
-
-
-
+student = {
+    "Name " : "Anas",
+    "City" : "Multan",
+    "Semester" : 2
+ }
+print(student["Name "])
+print(student["City"])
+print(student["Semester"])
 
 
+# adding a key
 
-Class Queue() {
-   private int[100] data;
-   int index = -1;
+student["GPA"] = "3.2"
+print(student["GPA"])
 
-   public int add(int number) {
-      
-       data.append(number)
+# updating the key 
+student["City"] = "Lahore"
+print(student["City"])
 
-       if(data.size() ==1) {
-           index = 0;
-       }
+#deleting the key 
+del student["GPA"]
+print(student)
 
-   }
+#  Loop over keys only (Default Behaiviour)
+for key in student:
+    print(key)
+# Name
+# City
+# Semester 
+
+# Loop over value
+for value in student.values():
+    print(value)
+# Anas
+# Lahore
+# 2nd 
+
+# loop over both key and value
+for key, value in student.items():
+    print(key ,"→" , value )
 
 
-   public int get() {
-
-       int number = data[index];
-
-       index++;
-
-
-   }
-
-}
+# loop over only string keys
+for key , value in student.items():
+    if type(value) == str:
+        print(key , "→", value)
 
 
-void main() {
-
-
-Queue q = new Queue();
-
-q.add(5)
-q.add(7)
-q.add(11)
-
-int number = q.get()
-int number = q.get()
-int number = q.get()
-
-}
