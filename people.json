@@ -1,0 +1,8 @@
+{
+    "Class" : "ADPC-Q",
+    "Students" : [
+       { "Name": "Anas" , "Marks" : 82 },
+       { "Name": "Ali" , "Marks" : 92},
+       { "Name": "Zain", "Marks": 70  }
+    ]
+}
